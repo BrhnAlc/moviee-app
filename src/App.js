@@ -2,6 +2,7 @@
 import './App.css';
 import AppRouter from "./router/AppRouter";
 import AuthContextProvider from './context/AuthContext';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <div className="dark:bg-gray-dark-main min-h-screen text-white">
       <AuthContextProvider>
       <AppRouter/>
+      <ToastContainer />
       </AuthContextProvider>
     </div>
   );
