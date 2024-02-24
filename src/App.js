@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="dark:bg-gray-dark-main min-h-screen text-white">
       <AuthContextProvider>
-      <AppRouter/>
-      <ToastContainer />
+         <AppRouter/>
+         <ToastContainer />
       </AuthContextProvider>
     </div>
   );
