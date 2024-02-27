@@ -1,8 +1,9 @@
-import React, { createContext } from 'react';
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth";
+import React, { createContext, useState } from 'react';
+import {createUserWithEmailAndPassword,onAuthStateChanged,signInWithEmailAndPassword,signOut } from "firebase/auth";
 import { auth } from './../auth/firebase';
 import {  useNavigate } from 'react-router-dom';
 import { toastErrorNotify, toastSuccessNotify } from '../helpers/ToastNotify';
+import { useEffect } from 'react';
   
 
 export const AuthContext =createContext();
@@ -10,7 +11,12 @@ export const AuthContext =createContext();
 
 
 const AuthContextProvider = ({children}) => {
+  const [currentUser, setcurrentUser] = useState(false)
   let navigate =useNavigate();
+
+  useEffect(()=>{
+    userObserver();
+  } , [])
     const createUser=async(email,password)=>{
         
         try {
@@ -36,8 +42,27 @@ const AuthContextProvider = ({children}) => {
         toastErrorNotify(error.messages);
       }
   };
+   
+  const logOut=()=>{
+    signOut(auth)
+    toastSuccessNotify("Logged out succesfully!")
+  };
 
-    const values={createUser,signIn}
+  const userObserver=()=>{
+    //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
+    onAuthStateChanged(auth,(user)=>{
+    if(user){
+      const {email,displayName,phoURL}=user
+      setcurrentUser( {email,displayName,phoURL});
+console.log(user);
+    }else{
+      setcurrentUser(false)
+     console.log("logged out");
+    }
+    })
+  }
+
+    const values={createUser,signIn,logOut,currentUser}
   return (
     <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
   )

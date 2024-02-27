@@ -1,8 +1,10 @@
 
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import alaca from '../assets/icons/alaca.jpg'
 import { Link } from 'react-router-dom'
+import { AuthContext } from './../context/AuthContext';
+
 
 
 function classNames(...classes) {
@@ -11,6 +13,7 @@ function classNames(...classes) {
 
 
 export default function Navbar() {
+  const {logOut} =useContext(AuthContext)
   const currentUser ={displayName:"Burhan Alaca" }
   return (
     <><Disclosure as="nav" className="bg-neutral-100 dark:bg-gray-900 py-3 dark:text-white fixed top-0 z-20 w-full">
@@ -72,6 +75,7 @@ export default function Navbar() {
                       <span
                         
                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer')}
+                        onClick={()=>logOut()}
                       >
                         Log out
                       </span>
