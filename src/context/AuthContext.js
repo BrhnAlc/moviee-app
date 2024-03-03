@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import {createUserWithEmailAndPassword,onAuthStateChanged,signInWithEmailAndPassword,signOut } from "firebase/auth";
+import {createUserWithEmailAndPassword,onAuthStateChanged,signInWithEmailAndPassword,signOut, updateProfile } from "firebase/auth";
 import { auth } from './../auth/firebase';
 import {  useNavigate } from 'react-router-dom';
 import { toastErrorNotify, toastSuccessNotify } from '../helpers/ToastNotify';
@@ -21,6 +21,11 @@ const AuthContextProvider = ({children}) => {
         
         try {
           let userCredential=  await createUserWithEmailAndPassword(auth, email, password) ;
+          //? kullanıcı profilini güncellemek için kullanılan firebase metodu
+      await updateProfile(auth.currentUser, {
+        //* key ve value değerleri aynı ise sadece key değerini yazabiliriz
+        displayName,
+      });
           console.log(userCredential);
            navigate("/");
            toastSuccessNotify("Registered successfully!");
