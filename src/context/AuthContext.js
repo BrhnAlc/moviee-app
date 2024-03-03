@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import {createUserWithEmailAndPassword,onAuthStateChanged,signInWithEmailAndPassword,signOut, updateProfile } from "firebase/auth";
+import {GoogleAuthProvider, createUserWithEmailAndPassword,onAuthStateChanged,signInWithEmailAndPassword,signInWithPopup,signOut, updateProfile } from "firebase/auth";
 import { auth } from './../auth/firebase';
 import {  useNavigate } from 'react-router-dom';
 import { toastErrorNotify, toastSuccessNotify } from '../helpers/ToastNotify';
@@ -70,9 +70,31 @@ const AuthContextProvider = ({children}) => {
      console.log("logged out");
     }
     })
+  };
+  
+  //* https://console.firebase.google.com/
+  //* => Authentication => sign-in-method => enable Google
+  //! Google ile girişi enable yap
+  //* => Authentication => settings => Authorized domains => add domain
+  //! Projeyi deploy ettikten sonra google sign-in çalışması için domain listesine deploy linkini ekle
+   
+
+  const signUpProvider =()=>{
+    //! Google ile giriş yapılması için kullanılan firebase metodu
+    const provider = new GoogleAuthProvider();
+    
+    //! Açılır pencere ile giriş yapılması için kullanılan firebase metodu
+    signInWithPopup(auth,provider)
+    .then((result)=>{
+     console.log(result);
+     navigate("/")
+    }).catch((error)=>{
+      console.log(error);
+    })
+
   }
 
-    const values={createUser,signIn,logOut,currentUser}
+    const values={createUser,signIn,logOut,currentUser,signUpProvider}
   return (
     <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
   )
