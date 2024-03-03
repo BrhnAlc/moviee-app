@@ -4,7 +4,7 @@ import { auth } from './../auth/firebase';
 import {  useNavigate } from 'react-router-dom';
 import { toastErrorNotify, toastSuccessNotify } from '../helpers/ToastNotify';
 import { useEffect } from 'react';
-  
+ 
 
 export const AuthContext =createContext();
 
@@ -17,14 +17,19 @@ const AuthContextProvider = ({children}) => {
   useEffect(()=>{
     userObserver();
   } , [])
-    const createUser=async(email,password)=>{
+    const createUser=async(email,password,displayName)=>{
         
         try {
-          let userCredential=  await createUserWithEmailAndPassword(auth, email, password) ;
+          let userCredential=  await createUserWithEmailAndPassword(  
+          auth,
+          email,
+          password
+          ) ;
           //? kullanıcı profilini güncellemek için kullanılan firebase metodu
       await updateProfile(auth.currentUser, {
+        displayName: displayName
         //* key ve value değerleri aynı ise sadece key değerini yazabiliriz
-        displayName,
+        
       });
           console.log(userCredential);
            navigate("/");
@@ -59,7 +64,7 @@ const AuthContextProvider = ({children}) => {
     if(user){
       const {email,displayName,phoURL}=user
       setcurrentUser( {email,displayName,phoURL});
-console.log(user);
+          console.log(user);
     }else{
       setcurrentUser(false)
      console.log("logged out");
