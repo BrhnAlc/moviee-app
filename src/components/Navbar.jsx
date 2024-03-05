@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import alaca from '../assets/icons/alaca.jpg'
 import { Link } from 'react-router-dom'
 import { AuthContext } from './../context/AuthContext';
+import Switch from './Switch';
 
 
 
@@ -26,7 +27,7 @@ export default function Navbar() {
           </Link>
           <div className="absolute inset-y-0 right-0 flex items-center ">
             {currentUser &&<h5 className='mr-2 capitalize'>{currentUser?.displayName}</h5>}
-
+            <Switch/>
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
               <div>
