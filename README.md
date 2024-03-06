@@ -1,4 +1,4 @@
-Hi I'm Burhan 👋. Welcome to my Library App project
+Hi I'm Burhan 👋. Welcome to my movie-app project
 
 In this project, users can log in and register and search for any book they want. They can also review the book details
 
@@ -8,10 +8,15 @@ Live Link of the Project
 Clik Me
 
 Libraries and Technologies I use
-React
-Context API
-Module Css
-googleapis
+React,
+Axios,
+Context API,
+Tailwind CSS,
+Firebase,
+React-Dom,
+React-icons,
+React-scrips,
+React-toastify
 
 How to install
 
