@@ -1,6 +1,6 @@
 Hi I'm Burhan 👋. Welcome to my movie-app project
 
-In this project, users can log in and register and search for any book they want. They can also review the book details
+In this project,  It offers users basic features such as searching for movies and getting detailed information.
 
 
 Live Link of the Project
