@@ -9,15 +9,15 @@ Live Link of the Project
 
 
 Libraries and Technologies I use
-React,
-Axios,
-Context API,
-Tailwind CSS,
-Firebase,
-React-Dom,
-React-icons,
-React-scrips,
-React-toastify
+-React,
+-Axios,
+-Context API,
+-Tailwind CSS,
+-Firebase,
+-React-Dom,
+-React-icons,
+-React-scrips,
+-React-toastify
 
 How to install
 
